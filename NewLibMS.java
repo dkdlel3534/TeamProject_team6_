@@ -53,4 +53,31 @@ public class NewLibMS
             loanDB.save(loan);
         }
     }
+    
+    /**
+     * 새 책을 등록하는 메소드
+     *
+     * @param  bookID(등록번호), title(제목), author(작가)
+     * 
+     */
+    public void registerNewBook(String bookID, String title, String author)
+    {
+        BookDB bookDB = new BookDB();
+
+        boolean resultBook = bookDB.check(bookID);
+
+        if (resultBook == true) {
+            System.out.println("이미 등록된 책입니다!");
+            return;
+        }
+
+        else{
+
+            Book book = new Book(title, author, bookID);
+
+            bookDB.save(book);
+
+            book.display();
+        }
+    }
 }

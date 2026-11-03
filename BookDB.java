@@ -17,4 +17,25 @@ public class BookDB
     {
 
     }
+    
+    /**
+     * 책 등록번호 검사 메소드
+     *
+     * @param  bookID(등록번호)
+     * @return    boolean
+     */
+    public boolean check(String bookID)
+    {
+
+    }
+
+    /**
+     * 책 객체 저장 메소드
+     *
+     * @param  book(책 객체)
+     */
+    public void save(Book book)
+    {
+        
+    }
 }

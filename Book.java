@@ -7,7 +7,17 @@
  */
 public class Book
 {
+    private String title;
+    private String author;
     private String bookID;
+    
+    /**
+     * Book 클래스의 객체 생성자
+     */
+    public Book(String title, String author, String bookID)
+    {
+        
+    }
     
     /**
      * 화면 출력 메소드
