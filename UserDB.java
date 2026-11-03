@@ -17,4 +17,25 @@ public class UserDB
     {
         
     }
+    
+    /**
+     * 이용자 학번 검사 메소드
+     *
+     * @param  stID(학번)
+     * @return    boolean
+     */
+    public boolean check(String stID)
+    {
+        
+    }
+
+    /**
+     * 이용자 객체 저장 메소드
+     *
+     * @param  user(이용자 객체)
+     */
+    public void save(User user)
+    {
+        
+    }
 }

@@ -80,4 +80,28 @@ public class NewLibMS
             book.display();
         }
     }
+    
+    /**
+     * 새 이용자를 등록하는 메소드.
+     *
+     * @param  stID(학번), name(이름)
+     */
+    public void registerNewBorrower(String stID, String name)
+    {
+        UserDB userDB = new UserDB();
+
+        boolean resultUserID = userDB.check(stID);
+
+        if (resultUserID == true) {
+            System.out.println("이미 등록된 이용자입니다!");
+            return;
+        }
+
+        else{User user = new User(stID, name);
+
+            userDB.save(user);
+
+            user.display();
+        }
+    }
 }

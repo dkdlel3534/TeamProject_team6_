@@ -8,7 +8,16 @@
 public class User
 {
     private String stID;
+    private String name;
+    
+    /**
+     * User 클래스의 객체 생성자
+     */
+    public User(String stID, String name)
+    {
 
+    }
+    
     /**
      * 화면 출력 메소드
      */
