@@ -7,6 +7,7 @@
  */
 public class NewLibMS
 {
+    private String name;
     private BookDB bookDB;
     private UserDB userDB;
     private LoanDB loanDB;
@@ -18,10 +19,6 @@ public class NewLibMS
      */
     public void borrowBook(String bookID, String stID)
     {
-        BookDB bookDB = new BookDB();
-        UserDB userDB = new UserDB();
-        LoanDB loanDB = new LoanDB();
-
         Book book = bookDB.search(bookID);
         User user = userDB.search(bookID);
 
@@ -36,15 +33,15 @@ public class NewLibMS
 
         boolean resultBook = book.check();
         boolean resultUser= user.check();
-        if(resultBook == false && resultUser == false){
-            System.out.println("책 대출불가능! & 이용자 대출불가능!");
+        if(resultBook == false && resultUser == true){
+            System.out.println("책 대출불가능! & 이용자 대출가능!");
         }
         else if ((resultBook == true) && (resultUser == false)){
             System.out.println("책 대출가능! & 이용자 대출불가능!");
             return;
         }
-        else if ((resultBook == false) && (resultUser == true)){
-            System.out.println("책 대출불가능! & 이용자 대출가능!");
+        else if ((resultBook == false) && (resultUser == false)){
+            System.out.println("책 대출불가능! & 이용자 대출불가능!");
             return;
         }
         else{
@@ -62,11 +59,9 @@ public class NewLibMS
      */
     public void registerNewBook(String bookID, String title, String author)
     {
-        BookDB bookDB = new BookDB();
+        boolean resultBookID = bookDB.check(bookID);
 
-        boolean resultBook = bookDB.check(bookID);
-
-        if (resultBook == true) {
+        if (resultBookID == true) {
             System.out.println("이미 등록된 책입니다!");
             return;
         }
@@ -88,16 +83,16 @@ public class NewLibMS
      */
     public void registerNewBorrower(String stID, String name)
     {
-        UserDB userDB = new UserDB();
+        boolean resultStID = userDB.check(stID);
 
-        boolean resultUserID = userDB.check(stID);
-
-        if (resultUserID == true) {
+        if (resultStID == true) {
             System.out.println("이미 등록된 이용자입니다!");
             return;
         }
 
-        else{User user = new User(stID, name);
+        else{
+            
+            User user = new User(stID, name);
 
             userDB.save(user);
 
