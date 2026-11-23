@@ -13,7 +13,7 @@ public class BookDB
      * @param  bookID(등록번호)
      * @return    Book(이용자 객체)
      */
-    public Book search(String bookID)
+    public Book search(int bookID)
     {
 
     }
@@ -24,7 +24,7 @@ public class BookDB
      * @param  bookID(등록번호)
      * @return    boolean
      */
-    public boolean check(String bookID)
+    public boolean check(int bookID)
     {
 
     }

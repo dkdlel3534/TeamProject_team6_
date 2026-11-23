@@ -9,12 +9,12 @@ public class Book
 {
     private String title;
     private String author;
-    private String bookID;
+    private int bookID;
     
     /**
      * Book 클래스의 객체 생성자
      */
-    public Book(String title, String author, String bookID)
+    public Book(int bookID, String title, String author)
     {
         
     }

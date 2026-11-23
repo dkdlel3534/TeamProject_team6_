@@ -17,10 +17,10 @@ public class NewLibMS
      *
      * @param  bookID(등록번호), stID(학번)
      */
-    public void borrowBook(String bookID, String stID)
+    public void borrowBook(int bookID, String stID)
     {
         Book book = bookDB.search(bookID);
-        User user = userDB.search(bookID);
+        User user = userDB.search(stID);
 
         if (book != null && user != null){
             book.display();
@@ -57,7 +57,7 @@ public class NewLibMS
      * @param  bookID(등록번호), title(제목), author(작가)
      * 
      */
-    public void registerNewBook(String bookID, String title, String author)
+    public void registerNewBook(int bookID, String title, String author)
     {
         boolean resultBookID = bookDB.check(bookID);
 
