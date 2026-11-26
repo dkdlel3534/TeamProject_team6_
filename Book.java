@@ -9,8 +9,8 @@ public class Book
 {
     private String title;
     private String author;
-    public int bookID;
-    public Loan loan;
+    int bookID;
+    Loan loan;
 
     /**
      * Book 클래스의 객체 생성자

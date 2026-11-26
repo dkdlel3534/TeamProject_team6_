@@ -4,13 +4,13 @@ import java.time.LocalDate;
  * 대출 객체를 생성하는 클래스
  *
  * @author (2025320070 복창희)
- * @version (2026.11.23)
+ * @version (2026.11.26)
  */
 public class Loan
 {
     private LocalDate loanDate;
     private LocalDate returnDue;
-    private User user;
+    User user;
     private Book book;
 
     /**
@@ -52,14 +52,36 @@ public class Loan
     }
 
     /**
-     * 이용자 및 도서와의 참조 연결을 해제하는 메소드
+     * 대출일을 반환하는 메소드
+     *
+     * @return 대출일
      */
-    public void disconnect()
+    public LocalDate getLoanDate()
     {
-        user.loan = null;
-        book.loan = null;
+        return loanDate;
+    }
 
-        user = null;
-        book = null;
+    /**
+     * 대출 도서와의 참조 연결을 해제하는 메소드
+     *
+     * @param book 연결을 해제할 도서 객체
+     */
+    public void disconnect(Book book)
+    {
+        if (this.book == book) {
+            this.book = null;
+        }
+    }
+
+    /**
+     * 대출 이용자와의 참조 연결을 해제하는 메소드
+     *
+     * @param user 연결을 해제할 이용자 객체
+     */
+    public void disconnect(User user)
+    {
+        if (this.user == user) {
+            this.user = null;
+        }
     }
 }

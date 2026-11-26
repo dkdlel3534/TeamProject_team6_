@@ -104,45 +104,60 @@ public class NewLibMS
         }
     }
 
-    /**
-     * 책을 반납하는 작업을 수행하는 메소드
-     *
-     * @param bookID 도서 등록번호
-     */
     public void returnBook(int bookID)
     {
+        // 도서 등록번호로 Book 객체 검색
         Book book = bookDB.search(bookID);
 
-        if (book != null) {
-            book.display();
-        }
-        else {
-            System.out.println("반납할 책을 찾을 수 없습니다!");
+        if (book == null) {
+            System.out.println("등록되지 않은 도서입니다.");
             return;
         }
 
+        book.display();
+
+        // 도서 대출 여부 확인
         boolean resultBook = book.check();
 
-        if (resultBook == true) {
-            System.out.println("반납할 수 없는 책입니다!");
+        if (resultBook) {
+            System.out.println("현재 대출 중인 도서가 아닙니다.");
             return;
         }
 
+        // Book과 연결된 Loan 객체 검색
         Loan loan = loanDB.getLoan(bookID);
 
         if (loan == null) {
-            System.out.println("대출 정보를 찾을 수 없습니다!");
+            System.out.println("대출 정보를 찾을 수 없습니다.");
             return;
         }
 
+        // 반납일 및 연체 여부 확인
         LocalDate returnDate = LocalDate.now();
+        LocalDate loanDate = loan.getLoanDate();
         boolean resultOverdue = loan.checkOverdue(returnDate);
 
-        Return returned = new Return(loan, returnDate, resultOverdue);
+        // Loan과 연결된 User 객체의 학번 가져오기
+        User user = loan.user;
+        String stID = user.getStID();
+
+        // 반납 객체 생성 및 출력
+        Return returned = new Return(stID, bookID, loanDate, returnDate, resultOverdue);
+
         returned.display();
+
+        // ReturnDB에 반납 정보 저장
         returnDB.save(returned);
 
-        loan.disconnect();
+        // Book, User, Loan 객체 간 연결 해제
+        book.disconnect(loan);
+        user.disconnect(loan);
+        loan.disconnect(book);
+        loan.disconnect(user);
+
+        // LoanDB에서 대출 정보 삭제
         loanDB.delete(loan);
+
+        System.out.println("도서 반납이 완료되었습니다.");
     }
 }

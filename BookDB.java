@@ -9,9 +9,7 @@ import java.util.Comparator;
  */
 public class BookDB
 {
-    private TreeSet<Book> bookSet = new TreeSet<>(
-        Comparator.comparingInt(book -> book.bookID)
-    );
+    private TreeSet<Book> bookSet = new TreeSet<>(Comparator.comparingInt(book -> book.bookID));
 
     /**
      * 책 등록번호 검색 메소드

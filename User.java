@@ -3,13 +3,13 @@
  * 이용자 객체를 생성하는 클래스
  *
  * @author (2025320070 복창희)
- * @version (2026.11.23)
+ * @version (2026.11.26)
  */
 public class User
 {
-    public String stID;
+    String stID;
     private String name;
-    public Loan loan;
+    Loan loan;
 
     /**
      * User 클래스의 객체 생성자
@@ -41,6 +41,16 @@ public class User
     public boolean check()
     {
         return loan == null;
+    }
+
+    /**
+     * 이용자 학번을 반환하는 메소드
+     *
+     * @return 이용자 학번
+     */
+    public String getStID()
+    {
+        return stID;
     }
 
     /**
