@@ -24,7 +24,7 @@ public class Loan
         this.user = user;
         this.book = book;
 
-        user.loan = this;
+        user.loanList.add(this);
         book.loan = this;
 
         this.loanDate = LocalDate.now();

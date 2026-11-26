@@ -3,7 +3,7 @@
  * 책 객체를 생성하는 클래스
  *
  * @author (2025320070 복창희)
- * @version (2026.11.23)
+ * @version (2026.11.26)
  */
 public class Book
 {

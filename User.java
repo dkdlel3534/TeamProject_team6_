@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * 이용자 객체를 생성하는 클래스
@@ -9,7 +10,7 @@ public class User
 {
     String stID;
     private String name;
-    Loan loan;
+    ArrayList<Loan> loanList;
 
     /**
      * User 클래스의 객체 생성자
@@ -21,7 +22,7 @@ public class User
     {
         this.stID = stID;
         this.name = name;
-        this.loan = null;
+        this.loanList = new ArrayList<>();
     }
 
     /**
@@ -40,7 +41,7 @@ public class User
      */
     public boolean check()
     {
-        return loan == null;
+        return loanList.size() < 3;
     }
 
     /**
@@ -60,8 +61,6 @@ public class User
      */
     public void disconnect(Loan loan)
     {
-        if (this.loan == loan) {
-            this.loan = null;
-        }
+        loanList.remove(loan);
     }
 }

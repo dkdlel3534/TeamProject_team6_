@@ -1,11 +1,10 @@
-
 import java.time.LocalDate;
 
 /**
  * 도서관관리시스템 클래스
  *
  * @author (2025320070 복창희)
- * @version (2026.11.23)
+ * @version (2026.11.26)
  */
 public class NewLibMS
 {
@@ -106,7 +105,6 @@ public class NewLibMS
 
     public void returnBook(int bookID)
     {
-        // 도서 등록번호로 Book 객체 검색
         Book book = bookDB.search(bookID);
 
         if (book == null) {
@@ -116,7 +114,6 @@ public class NewLibMS
 
         book.display();
 
-        // 도서 대출 여부 확인
         boolean resultBook = book.check();
 
         if (resultBook) {
@@ -124,7 +121,6 @@ public class NewLibMS
             return;
         }
 
-        // Book과 연결된 Loan 객체 검색
         Loan loan = loanDB.getLoan(bookID);
 
         if (loan == null) {
@@ -132,30 +128,24 @@ public class NewLibMS
             return;
         }
 
-        // 반납일 및 연체 여부 확인
         LocalDate returnDate = LocalDate.now();
         LocalDate loanDate = loan.getLoanDate();
         boolean resultOverdue = loan.checkOverdue(returnDate);
 
-        // Loan과 연결된 User 객체의 학번 가져오기
         User user = loan.user;
         String stID = user.getStID();
 
-        // 반납 객체 생성 및 출력
         Return returned = new Return(stID, bookID, loanDate, returnDate, resultOverdue);
 
         returned.display();
 
-        // ReturnDB에 반납 정보 저장
         returnDB.save(returned);
 
-        // Book, User, Loan 객체 간 연결 해제
         book.disconnect(loan);
         user.disconnect(loan);
         loan.disconnect(book);
         loan.disconnect(user);
 
-        // LoanDB에서 대출 정보 삭제
         loanDB.delete(loan);
 
         System.out.println("도서 반납이 완료되었습니다.");
